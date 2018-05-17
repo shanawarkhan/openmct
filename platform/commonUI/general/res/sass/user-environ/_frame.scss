@@ -22,6 +22,9 @@
 .frame {
     $ohH: $btnFrameH;
     $bc: $colorInteriorBorder;
+
+    position: absolute;
+
     &.child-frame.panel {
         z-index: 0; // Needed to prevent child-frame controls from showing through when another child-frame is above
         &:not(.no-frame) {
@@ -171,5 +174,72 @@ body.desktop .frame {
             opacity: 1;
             pointer-events: inherit;
         }
+    }
+}
+
+.l-layout {
+    &.fl-column,
+    &.fl-row,
+    &.fl-wrap,
+    &.fl-phone-best-fit {
+        display: flex;
+        flex-wrap: nowrap;
+        align-content: stretch;
+        > .frame {
+            display: block;
+            flex: 1 1 auto;
+            width: auto !important;
+            top: auto !important;
+            left: auto !important;
+            height: auto !important;
+            position: relative;
+            min-height: 200px;
+            min-width: 300px;
+            &.no-frame.t-frame-outer > .t-rep-frame {
+                &.contents {
+                    // When frame is hidden, add a bit of margin to the contents
+                    $m: $interiorMargin;
+                    top: $m; right: $m; bottom: $m; left: $m;
+                }
+            }
+            &.t-object-type-clock,
+            &.t-object-type-timer,
+            &.t-object-type-hyperlink,
+            &.t-object-type-summary-widget {
+                min-height: 50px;
+                min-width: 170px;
+                max-height: 80px;
+                max-width: 200px;
+            }
+            &.t-object-type-clock {
+                max-width: 300px;
+            }
+        }
+    }
+    &.fl-column {
+        flex-direction: column;
+        padding-right: $interiorMargin;
+    }
+    &.fl-row {
+        flex-direction: row;
+        padding-bottom: $interiorMargin;
+    }
+
+    &.fl-wrap {
+        //align-items: stretch;
+        flex-wrap: wrap;
+    }
+}
+
+body.phone {
+    .l-layout.fl-phone-best-fit {
+        flex-wrap: wrap !important;
+        padding: 0 !important;
+    }
+    &.portrait .l-layout.fl-phone-best-fit {
+        flex-direction: row !important;
+    }
+    &.landscape .l-layout.fl-phone-best-fit {
+        flex-direction: column !important;
     }
 }

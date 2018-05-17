@@ -784,8 +784,15 @@ textarea {
 }
 
 .grippy {
+    // Used in Summary Widgets
     @extend .icon-grippy;
     cursor: move;
+}
+
+.drag-vertical {
+    // Used in editor Elements pool
+    @extend .icon-menu-hamburger;
+    cursor: ns-resize;
 }
 
 /******************************************************** BROWSER ELEMENTS */
